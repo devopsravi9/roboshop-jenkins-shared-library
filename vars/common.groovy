@@ -10,7 +10,7 @@ def pipelineInit() {
 
 
 def PublishArtiFacts() {
-    stage("Prepare Artifacts"){
+    stage("Prepare Artifacts") {
         if (env.APP_TYPE == "nodejs") {
             sh """
         zip -r ${COMPONENT}-${TAG_NAME}.zip node_modules server.js
@@ -34,3 +34,4 @@ def PublishArtiFacts() {
       """
         }
     }
+}
