@@ -6,7 +6,7 @@ def warning(message) {
     echo "WARNING: ${message}"
 }
 
-def hello() {
+def call() {
     pipeline {
         agent any
         satges {
