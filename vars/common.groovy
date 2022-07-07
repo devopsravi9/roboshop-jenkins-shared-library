@@ -8,12 +8,29 @@ def pipelineInit() {
 }
 // consider list from ls -ltr and zip the required files only, then move it nexus repo node_modules was the folder that comes after npm insatll
 
+
 def PublishArtiFacts() {
-    stage('prepare ArtiFacts') {
-        if ( env.APP_TYPE == nodejs ) {
-            sh '''
-                zip -r ${COMPONENT}-${TAG_NAME}.zip node_modules server.js
-            '''
+    stage("Prepare Artifacts"){
+        if (env.APP_TYPE == "nodejs") {
+            sh """
+        zip -r ${COMPONENT}-${TAG_NAME}.zip node_modules server.js
+      """
+        }
+        if (env.APP_TYPE == "maven") {
+            sh """
+        cp target/${COMPONENT}-1.0.jar ${COMPONENT}.jar
+        zip -r ${COMPONENT}-${TAG_NAME}.zip ${COMPONENT}.jar
+      """
+        }
+        if (env.APP_TYPE == "python") {
+            sh """
+        zip -r ${COMPONENT}-${TAG_NAME}.zip *.py ${COMPONENT}.ini requirements.txt
+      """
+        }
+        if (env.APP_TYPE == "nginx") {
+            sh """
+        cd static
+        zip -r ../${COMPONENT}-${TAG_NAME}.zip *
+      """
         }
     }
-}
