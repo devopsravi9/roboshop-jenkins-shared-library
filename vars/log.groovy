@@ -35,7 +35,7 @@ def call() {
             sh "echo one"
         }
         stage('two') {
-            sh "two - ${DirectVar}"
+            sh "echo two - ${DirectVar}"
         }
     }
 }
