@@ -15,8 +15,6 @@ def hello() {
                     sh 'echo one'
                 }
             }
-        }
-        satges {
             stage('two') {
                 steps {
                     sh 'echo two'
