@@ -6,7 +6,7 @@ def call() {
         stage('build package ') {
             sh '''
                 ls -ltr
-                maven clean package
+                mvn clean package
                 '''
         }
     }
