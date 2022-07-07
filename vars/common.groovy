@@ -1,3 +1,5 @@
+// here we removing files in workstation from /ome/centos/workspace/ci-pipeline_cart_main
+
 def pipelineInit() {
         stage('clear old files & cloneing git again') {
             sh 'rm -rf *'
@@ -5,3 +7,4 @@ def pipelineInit() {
 
         }
     }
+
