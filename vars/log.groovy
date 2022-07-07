@@ -29,13 +29,11 @@ def warning(message) {
 
 // SCRIPTED approach. IN scripted approach we can also write code in between them.
 
-def call () {
+def call() {
     node () {
         stage ('one') {
             sh "echo one"
         }
-
-
         stage('two') {
             sh "two - ${DirectVar}"
         }
