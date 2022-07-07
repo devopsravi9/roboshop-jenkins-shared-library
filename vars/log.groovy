@@ -12,7 +12,7 @@ def call('InDirectVar') {
         stages {
             stage('one') {
                 steps {
-                    sh 'echo one- ${InDirectVar}
+                    sh 'echo one- ${InDirectVar}'
                 }
             }
             stage('two') {
