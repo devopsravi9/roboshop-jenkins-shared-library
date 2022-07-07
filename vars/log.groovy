@@ -6,7 +6,7 @@ def warning(message) {
     echo "WARNING: ${message}"
 }
 
-def call('InDirectVar') {
+def call(InDirectVar) {
     pipeline {
         agent any
         stages {
