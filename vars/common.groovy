@@ -34,4 +34,11 @@ def PublishArtiFacts() {
       """
         }
     }
-}
+    stage('upload artifact to nexus') {
+        withCredentials([usernamePassword(credentialsId: 'nexus', passwordVariable: 'pass', usernameVariable: 'user')]) {
+            sh """
+                curl -v -u ${user}:${pass} --upload-file ${COMPONENT}-${TAG_NAME}.zip http://172.31.2.48:8081/repository/${COMPONENT}/${COMPONENT}-${TAG_NAME}.zip
+                """
+            }
+        }
+    }
