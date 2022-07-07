@@ -9,7 +9,7 @@ def warning(message) {
 def call() {
     pipeline {
         agent any
-        satges {
+        stages {
             stage('one') {
                 steps {
                     sh 'echo one'
