@@ -49,7 +49,7 @@ def CodeChecks () {
         parallel([
             CodeCheck: {
                 echo "hello"
-            }
+            },
             UnitTest: {
                 echo "world"
             }
