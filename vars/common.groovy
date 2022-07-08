@@ -43,3 +43,5 @@ def PublishArtiFacts() {
             }
         }
     }
+
+//in nginx ../ is given to create zip before static dir, i.e, in parent dir of static dir
