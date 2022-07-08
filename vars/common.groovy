@@ -80,7 +80,7 @@ def UnitTest() {
     }
     if (env.APP_TYPE == "nginx") {
         sh """
-            # npmm run test
+            # npm run test
             echo run test cases
             """
     }
