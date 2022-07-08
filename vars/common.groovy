@@ -11,7 +11,6 @@ def pipelineInit() {
 
 def PublishArtiFacts() {
     stage("Prepare Artifacts") {
-        sh "echo ${env.APP_TYPE}"
 
         if (env.APP_TYPE == "nodejs") {
             sh """
