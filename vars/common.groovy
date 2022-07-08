@@ -18,9 +18,9 @@ def PublishArtiFacts() {
         }
         if (env.APP_TYPE == "maven") {
             sh """
-        cp target/${COMPONENT}-1.0.jar ${COMPONENT}.jar
-        zip -r ${COMPONENT}-${TAG_NAME}.zip ${COMPONENT}.jar
-      """
+                cp target/${COMPONENT}-1.0.jar ${COMPONENT}.jar
+                zip -r ${COMPONENT}-${TAG_NAME}.zip ${COMPONENT}.jar
+                """
         }
         if (env.APP_TYPE == "python") {
             sh """
