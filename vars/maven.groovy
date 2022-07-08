@@ -5,10 +5,14 @@ def call() {
 
         stage('build package ') {
             sh '''
-                ls -ltr
                 mvn clean package
-                ls -ltr
-                '''
+            '''
         }
+
+        if ( env.BRANCH_NAME == env.TAG_NAME ) {
+            common.PublishArtiFacts()
+        }
+
     }
 }
+
