@@ -13,8 +13,8 @@ def PublishArtiFacts() {
     stage("Prepare Artifacts") {
         if (env.APP_TYPE == "nodejs") {
             sh """
-        zip -r ${COMPONENT}-${TAG_NAME}.zip node_modules server.js
-      """
+                zip -r ${COMPONENT}-${TAG_NAME}.zip node_modules server.js
+                """
         }
         if (env.APP_TYPE == "maven") {
             sh """
@@ -24,14 +24,14 @@ def PublishArtiFacts() {
         }
         if (env.APP_TYPE == "python") {
             sh """
-        zip -r ${COMPONENT}-${TAG_NAME}.zip *.py ${COMPONENT}.ini requirements.txt
-      """
+                zip -r ${COMPONENT}-${TAG_NAME}.zip *.py ${COMPONENT}.ini requirements.txt
+                """
         }
         if (env.APP_TYPE == "nginx") {
             sh """
-        cd static
-        zip -r ../${COMPONENT}-${TAG_NAME}.zip *
-      """
+                cd static
+                zip -r ../${COMPONENT}-${TAG_NAME}.zip *
+                """
         }
     }
     stage('upload artifact to nexus') {
