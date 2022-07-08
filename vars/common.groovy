@@ -48,7 +48,7 @@ def CodeChecks () {
     stage('code checks & unit test') {
         parallel([
             CodeCheck: {
-                echo "hello"
+                sh "sonar-scanner -Dsonar.projectKey=${COMPONENT}  -Dsonar.host.url=http://172.31.4.137:9000 "
             },
             UnitTest: {
                 UnitTest()
