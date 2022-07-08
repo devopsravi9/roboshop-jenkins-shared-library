@@ -6,7 +6,7 @@ def pipelineInit() {
             git branch: 'main', url: "https://github.com/devopsravi9/${COMPONENT}.git"
         }
 }
-// consider list from ls -ltr and zip the required files only, then move it nexus repo node_modules was the folder that comes after npm insatll
+// consider list from ls -ltr and zip the required files only, then move it nexus repo node_modules was the folder that comes after npm install
 
 
 def PublishArtiFacts() {
@@ -85,10 +85,6 @@ def UnitTest() {
             """
     }
 }
-
-
-
-
 
 
 //in nginx ../ is given to create zip before static dir, i.e, in parent dir of static dir
