@@ -9,6 +9,8 @@ def call() {
             '''
         }
 
+        common.CodeChecks()
+
         if ( env.BRANCH_NAME == env.TAG_NAME ) {
             common.PublishArtiFacts()
         }
