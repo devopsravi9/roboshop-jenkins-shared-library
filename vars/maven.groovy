@@ -7,6 +7,7 @@ def call() {
             sh '''
                 ls -ltr
                 mvn clean package
+                ls -ltr
                 '''
         }
     }
