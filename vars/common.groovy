@@ -38,14 +38,14 @@ def PublishArtiFacts() {
     stage('upload artifact to nexus') {
         withCredentials([usernamePassword(credentialsId: 'nexus', passwordVariable: 'pass', usernameVariable: 'user')]) {
             sh """
-                curl -v -u ${user}:${pass} --upload-file ${COMPONENT}-${TAG_NAME}.zip http://172.31.2.48:8081/repository/${COMPONENT}/${COMPONENT}-${TAG_NAME}.zip
+                curl -v -u ${user}:${pass} --upload-file dev-${COMPONENT}-${TAG_NAME}.zip http://172.31.2.48:8081/repository/${COMPONENT}/dev-${COMPONENT}-${TAG_NAME}.zip
                 """
             }
         }
     }
 
 def CodeChecks () {
-    stage('code checks & unit test') {
+    stage('code quality checks & unit test') {
         parallel([
             CodeCheck: {
                 withCredentials([usernamePassword(credentialsId: 'SONARCUBE', passwordVariable: 'pass', usernameVariable: 'user')]) {
