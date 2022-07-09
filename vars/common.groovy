@@ -10,35 +10,36 @@ def pipelineInit() {
 
 
 def PublishArtiFacts() {
+    env.ENVIRONMENT="dev"
     stage("Prepare Artifacts") {
 
         if (env.APP_TYPE == "nodejs") {
             sh """
-                zip -r dev-${COMPONENT}-${TAG_NAME}.zip node_modules server.js
+                zip -r ${ENVIRONMENT}-${COMPONENT}-${TAG_NAME}.zip node_modules server.js
                 """
         }
         if (env.APP_TYPE == "maven") {
             sh """
                 cp target/${COMPONENT}-1.0.jar ${COMPONENT}.jar
-                zip -r dev-${COMPONENT}-${TAG_NAME}.zip ${COMPONENT}.jar
+                zip -r ${ENVIRONMENT}-${COMPONENT}-${TAG_NAME}.zip ${COMPONENT}.jar
                 """
         }
         if (env.APP_TYPE == "python") {
             sh """
-                zip -r dev-${COMPONENT}-${TAG_NAME}.zip *.py ${COMPONENT}.ini requirements.txt
+                zip -r ${ENVIRONMENT}-${COMPONENT}-${TAG_NAME}.zip *.py ${COMPONENT}.ini requirements.txt
                 """
         }
         if (env.APP_TYPE == "nginx") {
             sh """
                 cd static
-                zip -r ../dev-${COMPONENT}-${TAG_NAME}.zip *
+                zip -r ../${ENVIRONMENT}-${COMPONENT}-${TAG_NAME}.zip *
                 """
         }
     }
     stage('upload artifact to nexus') {
         withCredentials([usernamePassword(credentialsId: 'nexus', passwordVariable: 'pass', usernameVariable: 'user')]) {
             sh """
-                curl -v -u ${user}:${pass} --upload-file dev-${COMPONENT}-${TAG_NAME}.zip http://172.31.2.48:8081/repository/${COMPONENT}/dev-${COMPONENT}-${TAG_NAME}.zip
+                curl -v -u ${user}:${pass} --upload-file ${ENVIRONMENT}-${COMPONENT}-${TAG_NAME}.zip http://172.31.2.48:8081/repository/${COMPONENT}/${ENVIRONMENT}-${COMPONENT}-${TAG_NAME}.zip
                 """
             }
         }
