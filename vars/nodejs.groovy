@@ -5,8 +5,7 @@ def call() {
         common.pipelineInit()
 
         stage('download dependencies') {
-            sh '''
-                ls -ltr
+            sh '''                
                 npm install
                 '''
         }
