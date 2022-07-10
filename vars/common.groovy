@@ -10,18 +10,18 @@ def pipelineInit() {
 
 
 def PublishArtiFacts() {
-    env.ENVI="dev"
+    env.ENV="dev"
     stage("Prepare Artifacts") {
 
         if (env.APP_TYPE == "nodejs") {
             sh """
-                zip -r ${ENVI}-${COMPONENT}-${TAG_NAME}.zip node_modules server.js
+                zip -r ${ENV}-${COMPONENT}-${TAG_NAME}.zip node_modules server.js
                 """
         }
         if (env.APP_TYPE == "maven") {
             sh """
                 cp target/${COMPONENT}-1.0.jar ${COMPONENT}.jar
-                zip -r ${ENVI}-${COMPONENT}-${TAG_NAME}.zip ${COMPONENT}.jar
+                zip -r ${ENV}-${COMPONENT}-${TAG_NAME}.zip ${COMPONENT}.jar
                 """
         }
         if (env.APP_TYPE == "python") {
@@ -45,7 +45,7 @@ def PublishArtiFacts() {
         }
 
     stage('deploy to any env') {
-        build job: 'deploy-to-any-env', parameters: [string(name: 'COMPONENT', value: "${COMPONENT}"), string(name: 'ENV', value: "${ENV}"), string(name: 'APP_VERSION', value: "${TAG_NAME}")]
+        build job: 'deploy-to-any-env', parameters: [string(name: 'COMPONENT', value: "${COMPONENT}"), string(name: 'ENV', value: "${ENv}"), string(name: 'APP_VERSION', value: "${TAG_NAME}")]
     }
     }
 
