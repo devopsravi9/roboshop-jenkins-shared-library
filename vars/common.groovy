@@ -45,7 +45,7 @@ def PublishArtiFacts() {
         }
 
     stage('deploy to any env') {
-        build job: 'deploy-to-any-env', parameters: [string(name: 'COMPONENT', value: "${COMPONENT}"), string(name: 'ENV', value: "${ENv}"), string(name: 'APP_VERSION', value: "${TAG_NAME}")]
+        build job: 'deploy-to-any-env', parameters: [string(name: 'COMPONENT', value: "${COMPONENT}"), string(name: 'ENV', value: "${ENV}"), string(name: 'APP_VERSION', value: "${TAG_NAME}")]
     }
     }
 
