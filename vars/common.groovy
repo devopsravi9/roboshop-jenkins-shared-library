@@ -74,7 +74,7 @@ def promoterelease(SOURCE_ENV,ENV) {
             sh """
                 cp ${SOURCE_ENV}-${COMPONENT}-${TAG_NAME}.zip ${ENV}-${COMPONENT}-${TAG_NAME}.zip
                 curl -v -u ${user}:${pass} --upload-file ${ENV}-${COMPONENT}-${TAG_NAME}.zip http://172.31.2.48:8081/repository/${COMPONENT}/${ENV}-${COMPONENT}-${TAG_NAME}.zip
-    """
+             """
     }
 }
 
