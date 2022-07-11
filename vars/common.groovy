@@ -54,6 +54,19 @@ def PublishArtiFacts() {
 
     promoterelease("dev","qa")
 
+    stage('deploy to any env') {
+        // build job: 'deploy-to-any-env', parameters: [string(name: 'COMPONENT', value: "${COMPONENT}"), string(name: 'ENV', value: "qa"), string(name: 'APP_VERSION', value: "${TAG_NAME}")]
+        sh "echo deploy to qa environment"
+    }
+
+    testRuns ()
+
+    stage('run smoke test') {
+        sh "echo run smoke test"
+    }
+
+    promoterelease("qa","prod")
+
     }
 
 def promoterelease(SOURCE_ENV,ENV) {
@@ -107,6 +120,22 @@ def UnitTest() {
             # npm run test
             echo run test cases
             """
+    }
+}
+
+def testRuns () {
+    stage('integration, pentest & e2etest') {
+        parallel([
+            integrationtest : {
+                sh "echo integration test"
+                },
+            PenTest: {
+                sh "echo integration test"
+                },
+            e2eTest: {
+                sh "echo end 2 end test"
+            }
+        ])
     }
 }
 
