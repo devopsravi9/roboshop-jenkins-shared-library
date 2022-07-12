@@ -44,7 +44,7 @@ def PublishArtiFacts() {
             }
         }
 
-    stage('deploy to any env') {
+    stage('deploy to dev env') {
         build job: 'deploy-to-any-env', parameters: [string(name: 'COMPONENT', value: "${COMPONENT}"), string(name: 'ENV', value: "${ENV}"), string(name: 'APP_VERSION', value: "${TAG_NAME}")]
         }
 
@@ -54,7 +54,7 @@ def PublishArtiFacts() {
 
     promoterelease("dev","qa")
 
-    stage('deploy to any env') {
+    stage('deploy to qa env') {
         // build job: 'deploy-to-any-env', parameters: [string(name: 'COMPONENT', value: "${COMPONENT}"), string(name: 'ENV', value: "qa"), string(name: 'APP_VERSION', value: "${TAG_NAME}")]
         sh "echo deploy to qa environment"
     }
