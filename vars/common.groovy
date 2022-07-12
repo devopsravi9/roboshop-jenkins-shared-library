@@ -70,6 +70,7 @@ def PublishArtiFacts() {
     }
 
 def promoterelease(SOURCE_ENV,ENV) {
+    stage("upload artifact to ${ENV} environment")
         withCredentials([usernamePassword(credentialsId: 'nexus', passwordVariable: 'pass', usernameVariable: 'user')]) {
             sh """
                 cp ${SOURCE_ENV}-${COMPONENT}-${TAG_NAME}.zip ${ENV}-${COMPONENT}-${TAG_NAME}.zip
