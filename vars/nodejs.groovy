@@ -19,4 +19,4 @@ def call() {
 }
 
 // publishArtiFact is just a word we using this name for ziping process.
-// file shouldnot zip everytime it should happen only when tag creates, i.e, we are releasing new version.
+// file should not zip everytime it should happen only when tag creates, i.e, we are releasing new version.
