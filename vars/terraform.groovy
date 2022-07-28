@@ -1,4 +1,8 @@
 def call() {
+    options {
+        ansiColor('xterm')
+    }
+
     node {
 
         stage('terraform init') {
