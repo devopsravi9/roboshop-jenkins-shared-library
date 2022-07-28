@@ -3,6 +3,8 @@ def call() {
         properties([
             parameters([
                 choice(choices: ['dev', 'prod'], description: "choose environment", name: "ENV"),
+                choice(choices: ['apply', 'destroy'], description: "choose action", name: "ACTION"),
+
                 ])
         ])
         ansiColor('xterm') {
@@ -19,8 +21,8 @@ def call() {
                 sh 'terraform plan -var-file=env/${ENV}.tfvars'
             }
 
-            stage ('terraform apply') {
-                sh 'terraform apply -auto-approve -var-file=env/${ENV}.tfvars'
+            stage ('terraform ${ACTION}') {
+                sh 'terraform ${ACTION} -auto-approve -var-file=env/${ENV}.tfvars'
             }
         }
     }
