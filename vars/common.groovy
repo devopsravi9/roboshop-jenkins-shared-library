@@ -145,8 +145,37 @@ def PublishAMI () {
     stage ('Publish AMI') {
         sh '''
             terraform init
-            terraform apply -auto-approve
+            terraform apply -auto-approve -var APP_VERSION=${TAG_NAME}
         '''
+    }
+}
+
+def PublishlocalArtiFacts () {
+    env.ENV="dev"
+    stage("Publish local Artifacts") {
+
+        if (env.APP_TYPE == "nodejs") {
+            sh """
+                zip -r ${COMPONENT}-${TAG_NAME}.zip node_modules server.js
+                """
+        }
+        if (env.APP_TYPE == "maven") {
+            sh """
+                cp target/${COMPONENT}-1.0.jar ${COMPONENT}.jar
+                zip -r ${COMPONENT}-${TAG_NAME}.zip ${COMPONENT}.jar
+                """
+        }
+        if (env.APP_TYPE == "python") {
+            sh """
+                zip -r ${COMPONENT}-${TAG_NAME}.zip *.py ${COMPONENT}.ini requirements.txt
+                """
+        }
+        if (env.APP_TYPE == "nginx") {
+            sh """
+                cd static
+                zip -r ../${COMPONENT}-${TAG_NAME}.zip *
+                """
+        }
     }
 }
 
