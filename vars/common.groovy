@@ -148,6 +148,9 @@ def PublishAMI () {
             sh '''
                 terraform init
                 terraform apply -auto-approve -var APP_VERSION=${TAG_NAME}
+                # this to remove state file of  ami so it cant destroy ami image  
+                terraform state rm module.ami.aws_ami_from_instance.ami
+                terraform destroy -auto-approve -var APP_VERSION=${TAG_NAME}
             '''
         }
     }
