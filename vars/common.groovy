@@ -141,4 +141,14 @@ def testRuns () {
 }
 
 
+def PublishAMI () {
+    stage ('Publish AMI') {
+        sh '''
+            terraform init
+            terraform apply -auto-approve
+        '''
+    }
+}
+
+
 //in nginx ../ is given to create zip before static dir, i.e, in parent dir of static dir

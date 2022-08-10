@@ -14,6 +14,8 @@ def call() {
 
         if ( env.BRANCH_NAME == env.TAG_NAME ) {
             common.PublishArtiFacts()
+            //this is added for immutable approach
+            common.PublishAMI
         }
     }
 }
