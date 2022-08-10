@@ -2,7 +2,8 @@
 
 def pipelineInit() {
         stage('clear old files & cloneing git again') {
-            sh 'rm -rf *'
+            //sh 'rm -rf *'
+            sh 'find . | sed -e "1d" | xargs rm -rf '
             git branch: 'main', url: "https://github.com/devopsravi9/${COMPONENT}.git"
         }
 }
@@ -142,11 +143,13 @@ def testRuns () {
 
 
 def PublishAMI () {
-    stage ('Publish AMI') {
-        sh '''
-            terraform init
-            terraform apply -auto-approve -var APP_VERSION=${TAG_NAME}
-        '''
+    ansiColor('xterm') {
+        stage ('Publish AMI') {
+            sh '''
+                terraform init
+                terraform apply -auto-approve -var APP_VERSION=${TAG_NAME}
+            '''
+        }
     }
 }
 
