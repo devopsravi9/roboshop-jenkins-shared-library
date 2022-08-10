@@ -16,7 +16,7 @@ def call() {
             //common.PublishArtiFacts()
             common.PublishlocalArtiFacts()
             //this is added for immutable approach
-            common.PublishAMI
+            common.PublishAMI ()
         }
     }
 }
