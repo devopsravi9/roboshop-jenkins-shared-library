@@ -3,6 +3,9 @@ def call() {
     node() {
 
         common.pipelineInit()
+        if ( env.BRANCH_NAME == env.TAG_NAME ) {
+            sh 'git checkout ${TAG_NAME}'
+        }
 
         stage('build package ') {
             sh '''                
@@ -13,9 +16,11 @@ def call() {
         common.CodeChecks()
 
         if ( env.BRANCH_NAME == env.TAG_NAME ) {
-            common.PublishArtiFacts()
+            //common.PublishArtiFacts()
+            common.PublishlocalArtiFacts()
+            //this is added for immutable approach
+            common.PublishAMI ()
         }
-
     }
 }
 
