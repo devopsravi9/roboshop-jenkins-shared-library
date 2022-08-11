@@ -9,11 +9,8 @@ def call() {
         ])
         ansiColor('xterm') {
             stage ('Code Checkout') {
-                sh 'ls -al'
                 sh 'find . | sed -e "1d" | xargs rm -rf '
-                sh 'ls -al'
                 git branch: 'main', url: "https://github.com/devopsravi9/${REPO_NAME}.git"
-                sh 'exit 2'
             }
 
             stage('terraform init') {
