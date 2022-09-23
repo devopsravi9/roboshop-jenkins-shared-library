@@ -38,6 +38,7 @@ def PublishArtiFacts() {
         }
     }
     stage('upload artifact to nexus') {
+        // this is method of accesing credentials in scripted pipeline. this get from onlinee
         withCredentials([usernamePassword(credentialsId: 'nexus', passwordVariable: 'pass', usernameVariable: 'user')]) {
             sh """
                 curl -v -u ${user}:${pass} --upload-file ${ENV}-${COMPONENT}-${TAG_NAME}.zip http://172.31.2.48:8081/repository/${COMPONENT}/${ENV}-${COMPONENT}-${TAG_NAME}.zip
