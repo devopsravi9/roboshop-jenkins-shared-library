@@ -7,6 +7,8 @@ def call() {
             sh 'git checkout ${TAG_NAME}'
         }
 
+        //sh 'env'
+
         stage('download dependencies') {
             sh '''                
                 npm install
