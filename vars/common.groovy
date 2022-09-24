@@ -38,7 +38,7 @@ def PublishArtiFacts() {
         }
     }
     stage('upload artifact to nexus') {
-        // this is method of accesing credentials in scripted pipeline
+        // this is method of accesing credentials in scripted pipeline. also this can genrate from pipeline syntax script generator by using with credentials option. https://docs.cloudbees.com/docs/cloudbees-ci/latest/cloud-secure-guide/injecting-secrets
         withCredentials([usernamePassword(credentialsId: 'nexus', passwordVariable: 'pass', usernameVariable: 'user')]) {
             sh """
                 curl -v -u ${user}:${pass} --upload-file ${ENV}-${COMPONENT}-${TAG_NAME}.zip http://172.31.2.48:8081/repository/${COMPONENT}/${ENV}-${COMPONENT}-${TAG_NAME}.zip
