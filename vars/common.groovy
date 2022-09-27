@@ -54,7 +54,7 @@ def PublishArtiFacts() {
         sh "echo run smoke test"
         }
 
-    promoterelease("dev","qa")
+    promoterelease ("dev","qa")
 
     stage('deploy to qa env') {
         // build job: 'deploy-to-any-env', parameters: [string(name: 'COMPONENT', value: "${COMPONENT}"), string(name: 'ENV', value: "qa"), string(name: 'APP_VERSION', value: "${TAG_NAME}")]
@@ -67,11 +67,11 @@ def PublishArtiFacts() {
         sh "echo run smoke test"
     }
 
-    promoterelease("qa","prod")
+    promoterelease ("qa","prod")
 
     }
 
-def promoterelease(SOURCE_ENV,ENV) {
+def promoterelease (SOURCE_ENV,ENV) {
     stage("upload artifact to ${ENV} environment")
         withCredentials([usernamePassword(credentialsId: 'nexus', passwordVariable: 'pass', usernameVariable: 'user')]) {
             sh """
