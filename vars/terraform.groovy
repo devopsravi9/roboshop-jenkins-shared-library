@@ -10,7 +10,7 @@ def call() {
         ansiColor('xterm') {
             stage ('Code Checkout') {
                 sh 'find . | sed -e "1d" | xargs rm -rf '
-                git branch: 'main', url: "https://github.com/devopsravi9/${REPO_NAME}.git"
+                git branch: 'main.yml', url: "https://github.com/devopsravi9/${REPO_NAME}.git"
             }
 
             stage('terraform init') {
